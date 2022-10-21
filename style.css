@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+#canvas {
+    border: 1px solid black;
+}
+#root{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 600px;
+
+}
+#header{
+    text-align: center;
+    width: 100%;
+}
+#controls{
+    width: 100%;
+    margin: 10px 0;
+}
+#scoreScreen{
+    margin-left: 300px;
+}
