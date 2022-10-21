@@ -1,13 +1,13 @@
 class SnakeCell{
     #x
     #y
-    #coordinates
+    #position
     constructor(x, y) {
        this.#x = x;
        this.#y = y;
     }
 
-    get coordinates(){
+    get position(){
         return [this.#x, this.#y];
     }
 

@@ -13,7 +13,7 @@ class Snake {
         this.#height = 5;
         this.#position = [100, 100]; // temp solution
         this.#body = [];
-        this.#getStartPosition()
+        this.getStartPosition()
         this.#score = 0;
 
     }
@@ -64,7 +64,18 @@ class Snake {
 
 
     makeMove(direction) {
-        this.position = [this.x + (direction[0] * 5), this.y + (direction[1] * 5)];
+        const step = 5;
+        this.position = [this.x + (direction[0] * step), this.y + (direction[1] * step)];
+
+        let coords = new Set;
+        for (let i = 0; i < this.body.length; i++) {
+            coords.add(`${this.body[i].x},${this.body[i].y}`)
+        }
+        let mainCoord = `${this.position[0]},${this.position[1]}`
+        if(coords.has(mainCoord)){
+            alert(`You loose! Your score ${this.score}`);
+            return true;
+        }
         const cells = this.body;
         for (let i = cells.length - 1; i >= 0; i--) {
             if (i === 0) {
@@ -83,7 +94,7 @@ class Snake {
     }
 
 
-    #getStartPosition() {
+    getStartPosition() {
         let prevX = this.position[0];
         let prevY = this.position[0];
         for (let i = 0; i < this.#length; i++) {

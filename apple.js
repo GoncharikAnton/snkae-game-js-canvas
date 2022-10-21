@@ -45,7 +45,6 @@ class Apple{
         const x = Math.floor(Math.random() * (this.#canvasWidth - this.width) + this.width);
         const y = Math.floor(Math.random() * (this.#canvasHeight - this.height) + this.height);
         this.position = [x, y];
-        console.log(this.position);
     }
 }
 

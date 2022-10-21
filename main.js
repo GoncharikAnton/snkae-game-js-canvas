@@ -5,36 +5,32 @@ import Directions from "./directions.js";
 import SnakeController from "./controller.js";
 
 const canvas = document.querySelector('#canvas');
-// const ctx = canvas.getContext('2d');
 const startBtn = document.querySelector('#startBtn');
+const pauseBtn = document.querySelector('#pauseBtn');
 
 
-const snake = new Snake();
-const apple = new Apple(5,5, canvas.width, canvas.height);
-const view = new SnakeView(snake, apple, canvas);
-
-const controller = new SnakeController(snake, apple, view, canvas);
-
-
+let controller;
 let dir = [1, 0];
+let decisionOfPause = true;
 
 document.addEventListener('keydown', e => {
-
     const dirKey = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown' ];
     const idx = dirKey.indexOf(e.key)
-     dir = Directions.allDirections[idx];
+    dir = Directions.allDirections[idx];
+    controller.direction = dir;
 
 })
 startBtn.addEventListener('click', () => {
-    const interval = setInterval(()=>{
-        snake.makeMove(dir)
-        view.renderSnake()
-        view.renderApple()
-        controller.checkMetWall()
-        controller.checkEatApple()
+    const snake = new Snake();
+    const apple = new Apple(5,5, canvas.width, canvas.height);
+    const view = new SnakeView(snake, apple, canvas);
+    controller = new SnakeController(snake, apple, view, canvas);
 
-    }, 50)
-
+    controller.startGame()
+})
+pauseBtn.addEventListener('click', ()=>{
+    controller.pauseTheGame(decisionOfPause);
+    decisionOfPause = !decisionOfPause;
 })
 
 

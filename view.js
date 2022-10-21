@@ -13,6 +13,11 @@ class SnakeView {
         return this.#canvas;
     }
 
+    renderScore(){
+        const score = document.querySelector('#scoreScreen');
+        score.textContent = `Score: ${this.#snake.score}`
+    }
+
     renderSnake() {
         this.clearBoard()
 
@@ -28,6 +33,7 @@ class SnakeView {
     }
 
     renderApple() {
+        this.renderScore()
         const position = this.#apple.position;
         const ctx = this.canvas.getContext('2d');
         const img = new Image();
@@ -37,7 +43,7 @@ class SnakeView {
         img.height = this.#apple.height;
         img.style.height = this.#apple.height;
         img.onload = () => {
-            ctx.drawImage(img, position[0] - (this.#apple.width / 2), position[1] - (this.#apple.height / 2), 15, 15);
+            ctx.drawImage(img, position[0], position[1], 15, 15);
         }
     }
 
