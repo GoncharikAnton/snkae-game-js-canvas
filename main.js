@@ -16,18 +16,22 @@ let decisionOfPause = true;
 document.addEventListener('keydown', e => {
     const dirKey = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown' ];
     const idx = dirKey.indexOf(e.key)
-    dir = Directions.allDirections[idx];
-    controller.direction = dir;
+    if(!(dir[0] === -Directions.allDirections[idx][0] || dir[1] === -Directions.allDirections[idx][1])){
+        dir = Directions.allDirections[idx];
+        controller.direction = dir;
+    }
 
 })
 startBtn.addEventListener('click', () => {
-    const snake = new Snake();
-    const apple = new Apple(5,5, canvas.width, canvas.height);
-    const view = new SnakeView(snake, apple, canvas);
-    controller = new SnakeController(snake, apple, view, canvas);
+    if(!controller){
+        const snake = new Snake();
+        const apple = new Apple(5,5, canvas.width, canvas.height);
+        const view = new SnakeView(snake, apple, canvas);
+        controller = new SnakeController(snake, apple, view, canvas);
 
-    controller.startGame()
-})
+        controller.startGame()
+    }
+    })
 pauseBtn.addEventListener('click', ()=>{
     controller.pauseTheGame(decisionOfPause);
     decisionOfPause = !decisionOfPause;
