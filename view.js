@@ -38,12 +38,8 @@ class SnakeView {
         const ctx = this.canvas.getContext('2d');
         const img = new Image();
         img.src = this.#apple.src;
-        img.style.width = this.#apple.width;
-        img.width = this.#apple.width;
-        img.height = this.#apple.height;
-        img.style.height = this.#apple.height;
         img.onload = () => {
-            ctx.drawImage(img, position[0], position[1], 15, 15);
+            ctx.drawImage(img, position[0] - (this.#apple.width / 2), position[1] - (this.#apple.height / 2), this.#apple.width, this.#apple.height);
         }
     }
 

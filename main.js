@@ -2,7 +2,7 @@ import Snake from "./snake.js";
 import SnakeView from "./view.js";
 import Apple from "./apple.js";
 import Directions from "./directions.js";
-import SnakeController from "./controller.js";
+import SnakeController from "./snakeController.js";
 
 const canvas = document.querySelector('#canvas');
 const startBtn = document.querySelector('#startBtn');
@@ -23,9 +23,9 @@ document.addEventListener('keydown', e => {
 
 })
 startBtn.addEventListener('click', () => {
-    if(!controller){
+    if(!controller || controller.end){
         const snake = new Snake();
-        const apple = new Apple(5,5, canvas.width, canvas.height);
+        const apple = new Apple(15,15, canvas.width, canvas.height);
         const view = new SnakeView(snake, apple, canvas);
         controller = new SnakeController(snake, apple, view, canvas);
 

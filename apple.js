@@ -11,7 +11,7 @@ class Apple{
         this.#canvasWidth = canvasWidth;
         this.#canvasHeight = canvasHeight;
         this.#position = [];
-        this.#src = 'apple.jpg'
+        this.#src = 'apple.jpg';
         this.changePosition();
     }
 

@@ -4,12 +4,18 @@ class SnakeController{
     #view
     #canvas
     #direction
+    #end
     constructor(snake, apple, view, canvas){
         this.#snake = snake;
         this.#apple = apple;
         this.#view = view;
         this.#canvas = canvas;
         this.#direction = [1,0];
+        this.#end = false;
+    }
+
+    get end(){
+        return this.#end;
     }
 
     get snake() {
@@ -40,6 +46,7 @@ class SnakeController{
             const loose = this.snake.makeMove(this.direction);
             if(loose){
                 clearInterval(this.interval);
+                this.#end = true;
             }
             this.view.renderSnake()
             this.view.renderApple()
@@ -55,13 +62,14 @@ class SnakeController{
         if(this.snake.x >= canvasEndW || this.snake.y >= canvasEndH
         || this.snake.x === 0 || this.snake.y === 0){
             alert(`You loose! Your score ${this.snake.score}`);
-            clearInterval(this.interval)
+            clearInterval(this.interval);
+            this.#end = true;
         }
     }
 
     checkEatApple() {
-        if (this.snake.x >= this.apple.x - 10 && this.snake.x <= this.apple.x + 12.5 &&
-            this.snake.y >= this.apple.y - 10 && this.snake.y <= this.apple.y + 12.5) {
+        if (this.snake.x >= this.apple.x - (this.apple.width / 2) && this.snake.x <= this.apple.x + (this.apple.width / 2) &&
+            this.snake.y >= this.apple.y - (this.apple.height / 2) && this.snake.y <= this.apple.y + (this.apple.height / 2)) {
             this.snake.score += 1;
             this.snake.length += 1;
             this.apple.changePosition();
